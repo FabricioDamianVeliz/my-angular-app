@@ -1,10 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component } from '@angular/core';
 
 export interface ProductData {
-  id: string;
   name: string;
   cost: string;
 }
@@ -21,8 +17,7 @@ const getRandomName = (): string => {
   return NAMES[randomIndex];
 };
 
-const PRODUCTS: ProductData[] = Array.from({ length: 100 }, (_, index) => ({
-  id: (index + 1).toString(),
+const PRODUCTS: ProductData[] = Array.from({ length: 10 }, (_, index) => ({
   name: getRandomName(),
   cost: `U$S ${Math.floor(Math.random() * 100) + 1}`
 }));
@@ -32,44 +27,30 @@ const PRODUCTS: ProductData[] = Array.from({ length: 100 }, (_, index) => ({
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'cost'];
-  dataSource: MatTableDataSource<ProductData>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+export class AppComponent {
+  dataSource: ProductData[];
+  filteredData: ProductData[];
 
   constructor() {
-    this.dataSource = new MatTableDataSource(PRODUCTS);
+    this.dataSource = PRODUCTS;
+    this.filteredData = this.dataSource;
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  showList = false;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  toggleList() {
+    this.showList = !this.showList;
+    if (this.showList) {
+      this.filteredData = this.dataSource;
+    } else {
+      this.filteredData = [];
     }
   }
-
-  showTable = false;
-
-  toggleTable() {
-    this.showTable = !this.showTable;
-    if (this.showTable) {
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
-    }
-  }
-  
 }
+
+
+
+
 
 
 
