@@ -1,60 +1,9 @@
-<style>
-  .toolbar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    padding: 16px;
-  }
-
-  .toolbar button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-    padding: 8px 16px;
-    border-radius: 4px;
-    margin-right: 8px;
-  }
-
-  .toolbar button:last-child {
-    margin-right: 0;
-  }
-
-  .toolbar button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-  }
-
-  .content ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .content li {
-    margin-bottom: 8px;
-    color: #333;
-  }
-</style>
-
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
 
   <!-- Botón para mostrar/ocultar lista -->
-  <button mat-button (click)="toggleList()">Mostrar/Ocultar Lista</button>
-  
+  <button mat-raised-button color="primary" class="boton" (click)="toggleList()">Mostrar/Ocultar Lista</button>
+
 </div>
 
 <!-- Contenido principal -->
@@ -68,5 +17,7 @@
   </div>
 
 </div>
+
+
 
 
